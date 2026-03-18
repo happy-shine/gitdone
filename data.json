@@ -17,8 +17,8 @@
       "milestones": [
         {"status": "done", "text": "脚本原型完成"},
         {"status": "done", "text": "拆分为 repo 结构"},
-        {"status": "active", "text": "GitHub 建库"},
-        {"status": "todo", "text": "Akash 数据源"},
+        {"status": "done", "text": "GitHub 建库"},
+        {"status": "active", "text": "Akash 数据源"},
         {"status": "todo", "text": "Dashboard MVP"}
       ]
     },
@@ -50,6 +50,7 @@
       "project": "gpu-price-tracker",
       "tasks": [
         {"text": "GitHub 建库", "priority": "urgent", "done": true},
+        {"text": "Dashboard 数据模板分离", "priority": "urgent", "done": true},
         {"text": "Akash 数据源接入", "priority": "urgent", "done": false},
         {"text": "套利信号 TG Bot", "priority": "normal", "done": false},
         {"text": "Dashboard MVP · FastAPI", "priority": "normal", "done": false},
@@ -94,16 +95,18 @@
       {"text": "算力预言机", "dim": true}
     ],
     "in_progress": [
-      {"text": "GitHub 建库", "owner": "Kieran"},
+      {"text": "Akash 数据源接入", "owner": "Kieran"},
       {"text": "知乎爬虫", "owner": "Aotian"},
       {"text": "RVC vs Fish Audio 选型", "owner": "Shine"}
     ],
     "done": [
       {"text": "脚本原型"},
       {"text": "Repo 结构拆分"},
+      {"text": "GitHub 建库"},
       {"text": "性转克隆体论证"},
       {"text": "GPT-SoVITS TTS"},
-      {"text": "Dashboard 上线"}
+      {"text": "Dashboard 上线"},
+      {"text": "数据模板分离"}
     ]
   },
   "backlog": [
