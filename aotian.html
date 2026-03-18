@@ -4,75 +4,152 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>@Aotian · Sprint</title>
-<style>
-  * { margin: 0; padding: 0; box-sizing: border-box; }
-  body { font-family: -apple-system, "Helvetica Neue", "PingFang SC", sans-serif; background: #FAF6F1; color: #2C2418; padding: 32px 24px; max-width: 800px; margin: 0 auto; line-height: 1.6; }
-  .back { display: inline-block; font-size: 13px; color: #8B7355; text-decoration: none; margin-bottom: 24px; padding: 6px 16px; border-radius: 16px; border: 1px solid #E8DDD0; }
-  .back:hover { background: #2C2418; color: #FAF6F1; border-color: #2C2418; }
-  .header { margin-bottom: 32px; padding-bottom: 20px; border-bottom: 2px solid #E8DDD0; }
-  .header h1 { font-size: 24px; color: #3A5A3A; }
-  .header .meta { font-size: 13px; color: #8B7355; margin-top: 4px; }
-  .card { background: #FFF; border-radius: 16px; padding: 24px 28px; margin-bottom: 20px; border: 1px solid #E8DDD0; position: relative; overflow: hidden; }
-  .card::before { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 5px; background: #4A6B4A; }
-  .card-title { font-size: 16px; font-weight: 700; color: #3A5A3A; margin-bottom: 16px; }
-  .pipeline { display: flex; align-items: center; gap: 0; margin-bottom: 16px; }
-  .pipeline-stage { padding: 5px 14px; font-size: 12px; font-weight: 500; color: #B0A898; border-radius: 6px; }
-  .pipeline-stage.active { font-weight: 700; color: #FFF; background: #4A6B4A; }
-  .pipeline-arrow { color: #D0C8BC; font-size: 13px; margin: 0 4px; }
-  .progress-row { display: flex; align-items: center; gap: 14px; margin-bottom: 16px; }
-  .progress-label { font-size: 11px; font-weight: 600; color: #8B7355; text-transform: uppercase; letter-spacing: 1px; min-width: 68px; }
-  .progress-bar { flex: 1; height: 10px; background: #E8E0D6; border-radius: 5px; overflow: hidden; }
-  .progress-fill { height: 100%; border-radius: 5px; background: linear-gradient(90deg, #4A6B4A, #6A8B6A); }
-  .progress-pct { font-size: 13px; font-weight: 700; color: #4A6B4A; }
-  .info-grid { display: grid; grid-template-columns: 68px 1fr; gap: 6px 14px; margin-bottom: 16px; }
-  .info-label { font-size: 11px; font-weight: 600; color: #8B7355; text-transform: uppercase; letter-spacing: 1px; }
-  .info-value { font-size: 13px; }
-  .info-value.blocker { color: #8B2E1A; font-weight: 600; }
-  .section-title { font-size: 16px; font-weight: 700; margin: 28px 0 16px; padding-bottom: 10px; border-bottom: 2px solid #E8DDD0; }
-  .task-list { list-style: none; }
-  .task-list li { font-size: 14px; padding: 8px 0 8px 18px; position: relative; }
-  .task-list li::before { content: ''; position: absolute; left: 0; top: 50%; transform: translateY(-50%); width: 8px; height: 8px; border-radius: 50%; }
-  .task-list li.urgent::before { background: #C4633E; }
-  .task-list li.normal::before { background: #5A8AB0; }
-  .task-list li.done::before { background: #4A6B4A; }
-  .task-list li.urgent { font-weight: 600; }
-  .task-list li.done { color: #8B7355; text-decoration: line-through; }
-  .footer { text-align: center; font-size: 12px; color: #B0A898; margin-top: 40px; padding-top: 20px; border-top: 1px solid #E8DDD0; }
+<style>* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: -apple-system, "Helvetica Neue", "PingFang SC", "Hiragino Sans GB", sans-serif; background: #FAF6F1; color: #2C2418; padding: 32px 36px; max-width: 980px; margin: 0 auto; line-height: 1.6; }
+.header { text-align: center; margin-bottom: 24px; padding-bottom: 16px; border-bottom: 2px solid #E8DDD0; }
+.header h1 { font-size: 28px; font-weight: 700; letter-spacing: 1px; }
+.header .meta { font-size: 14px; color: #8B7355; margin-top: 8px; }
+.stats { display: flex; justify-content: center; gap: 24px; margin-top: 16px; }
+.stat-pill { display: inline-flex; align-items: center; gap: 6px; padding: 6px 16px; border-radius: 20px; font-size: 13px; font-weight: 600; }
+.stat-urgent { background: #F5E6E0; color: #8B2E1A; }
+.stat-normal { background: #E0E8F0; color: #2A4A66; }
+.stat-total { background: #E8E0D6; color: #5A4A3A; }
+
+/* Floating sidebar */
+.float-sidebar { position: fixed; top: 50%; left: 24px; transform: translateY(-50%); width: 120px; background: #2C2418; border-radius: 14px; padding: 20px 16px; display: flex; flex-direction: column; gap: 4px; z-index: 100; box-shadow: 0 4px 20px rgba(0,0,0,0.15); }
+@media (max-width: 900px) { .float-sidebar { display: none; } }
+.float-sidebar-title { font-size: 10px; font-weight: 600; color: #8B7355; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 12px; padding-bottom: 10px; border-bottom: 1px solid #4A3A28; }
+.float-sidebar-link { display: block; font-size: 13px; font-weight: 500; color: #D0C8BC; text-decoration: none; padding: 8px 12px; border-radius: 8px; transition: all 0.15s; }
+.float-sidebar-link:hover { background: #4A3A28; color: #FAF6F1; }
+.float-sidebar-link .dot { display: inline-block; width: 8px; height: 8px; border-radius: 50%; margin-right: 8px; }
+.dot-rust { background: #C4633E; }
+.dot-blue { background: #5A8AB0; }
+.dot-green { background: #6A8B6A; }
+.float-sidebar-footer { margin-top: 12px; padding-top: 10px; border-top: 1px solid #4A3A28; font-size: 10px; color: #5A4A3A; line-height: 1.4; }
+
+/* Cards */
+.cards-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 24px; }
+@media (max-width: 700px) { .cards-row { grid-template-columns: 1fr; } }
+.card { background: #FFF; border-radius: 16px; padding: 22px 24px; border: 1px solid #E8DDD0; position: relative; overflow: hidden; }
+.card::before { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 5px; }
+.card.accent-rust::before { background: #C4633E; }
+.card.accent-blue::before { background: #3D6080; }
+.card.accent-green::before { background: #4A6B4A; }
+.card-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 20px; }
+.card-title { font-size: 20px; font-weight: 700; }
+.card.accent-rust .card-title { color: #8B4A2A; }
+.card.accent-blue .card-title { color: #2A4A66; }
+.card.accent-green .card-title { color: #3A5A3A; }
+.owner-tag { font-size: 12px; padding: 4px 12px; border-radius: 12px; font-weight: 600; }
+.card.accent-rust .owner-tag { background: #F5E6E0; color: #8B4A2A; }
+.card.accent-blue .owner-tag { background: #E0E8F0; color: #2A4A66; }
+.card.accent-green .owner-tag { background: #D4E8D0; color: #3A5A3A; }
+.card-desc { font-size: 13px; color: #8B7355; margin-bottom: 20px; }
+
+/* Pipeline */
+.pipeline { display: flex; align-items: center; margin-bottom: 20px; }
+.pipeline-stage { padding: 6px 16px; font-size: 13px; font-weight: 500; color: #B0A898; border-radius: 6px; }
+.pipeline-stage.active { font-weight: 700; color: #FFF; }
+.card.accent-rust .pipeline-stage.active { background: #C4633E; }
+.card.accent-blue .pipeline-stage.active { background: #3D6080; }
+.card.accent-green .pipeline-stage.active { background: #4A6B4A; }
+.pipeline-stage.done { color: #8B7355; text-decoration: line-through; }
+.pipeline-arrow { color: #D0C8BC; font-size: 14px; margin: 0 4px; }
+
+/* Progress */
+.progress-row { display: flex; align-items: center; gap: 16px; margin-bottom: 20px; }
+.progress-label { font-size: 12px; font-weight: 600; color: #8B7355; text-transform: uppercase; letter-spacing: 1px; min-width: 72px; }
+.progress-bar { flex: 1; height: 12px; background: #E8E0D6; border-radius: 6px; overflow: hidden; }
+.progress-fill { height: 100%; border-radius: 6px; }
+.card.accent-rust .progress-fill { background: linear-gradient(90deg, #C4633E, #D4845A); }
+.card.accent-blue .progress-fill { background: linear-gradient(90deg, #3D6080, #5A8AB0); }
+.card.accent-green .progress-fill { background: linear-gradient(90deg, #4A6B4A, #6A8B6A); }
+.progress-pct { font-size: 14px; font-weight: 700; }
+.card.accent-rust .progress-pct { color: #C4633E; }
+.card.accent-blue .progress-pct { color: #3D6080; }
+.card.accent-green .progress-pct { color: #4A6B4A; }
+
+/* Info grid */
+.info-grid { display: grid; grid-template-columns: 72px 1fr; gap: 8px 16px; margin-bottom: 20px; }
+.info-label { font-size: 12px; font-weight: 600; color: #8B7355; text-transform: uppercase; letter-spacing: 1px; padding-top: 2px; }
+.info-value { font-size: 14px; }
+.info-value.blocker { color: #8B2E1A; font-weight: 600; }
+
+/* Milestones */
+.milestones { list-style: none; }
+.milestones li { font-size: 13px; padding: 4px 0; display: flex; align-items: center; gap: 8px; }
+.ms-icon { width: 20px; height: 20px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 11px; flex-shrink: 0; }
+.ms-done { background: #D4E8D0; color: #3A5A3A; }
+.ms-active { background: #F5E6E0; color: #8B2E1A; font-weight: 700; }
+.ms-todo { background: #E8E0D6; color: #B0A898; }
+.ms-text-done { color: #8B7355; text-decoration: line-through; }
+.ms-text-active { color: #2C2418; font-weight: 600; }
+.ms-text-todo { color: #B0A898; }
+
+/* Section */
+.section-title { font-size: 18px; font-weight: 700; margin: 36px 0 20px; padding-bottom: 12px; border-bottom: 2px solid #E8DDD0; }
+
+/* Kanban */
+.kanban { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; margin-bottom: 32px; }
+@media (max-width: 600px) { .kanban { grid-template-columns: 1fr; } }
+.kanban-col { background: #F5F0EA; border-radius: 12px; padding: 12px; max-height: 360px; overflow-y: auto; scrollbar-width: none; -ms-overflow-style: none; }
+.kanban-col::-webkit-scrollbar { display: none; }
+.kanban-header { font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 2px; padding: 8px 12px; border-radius: 8px; margin-bottom: 12px; text-align: center; }
+.kanban-todo { background: #F5E6E0; color: #8B2E1A; }
+.kanban-progress { background: #FFF3D6; color: #8B6914; }
+.kanban-done { background: #D4E8D0; color: #3A5A3A; }
+.kanban-card { background: #FFF; border-radius: 8px; padding: 10px 14px; margin-bottom: 8px; font-size: 13px; color: #2C2418; border-left: 3px solid #E8DDD0; box-shadow: 0 1px 3px rgba(0,0,0,0.04); }
+.kanban-card.active { border-left-color: #C4633E; font-weight: 600; }
+.kanban-card.done { border-left-color: #4A6B4A; color: #8B7355; text-decoration: line-through; }
+.kanban-card.dim { color: #B0A898; }
+.kanban-owner { float: right; font-size: 11px; font-weight: 400; color: #8B7355; background: #F5F0EA; padding: 2px 8px; border-radius: 10px; }
+
+/* Sprint list */
+.sprint-group { margin-bottom: 20px; }
+.sprint-owner { font-size: 14px; font-weight: 700; color: #5A4A3A; margin-bottom: 8px; }
+.sprint-list { list-style: none; }
+.sprint-list li { font-size: 14px; padding: 6px 0 6px 16px; position: relative; }
+.sprint-list li::before { content: ''; position: absolute; left: 0; top: 50%; transform: translateY(-50%); width: 8px; height: 8px; border-radius: 50%; }
+.sprint-list li.urgent::before { background: #C4633E; }
+.sprint-list li.normal::before { background: #5A8AB0; }
+.sprint-list li.backlog::before { background: #D0C8BC; }
+.sprint-list li.urgent { font-weight: 600; }
+
+/* Task list (user pages) */
+.task-list { list-style: none; }
+.task-list li { font-size: 14px; padding: 8px 0 8px 18px; position: relative; }
+.task-list li::before { content: ''; position: absolute; left: 0; top: 50%; transform: translateY(-50%); width: 8px; height: 8px; border-radius: 50%; }
+.task-list li.urgent::before { background: #C4633E; }
+.task-list li.normal::before { background: #5A8AB0; }
+.task-list li.done-item::before { background: #4A6B4A; }
+.task-list li.urgent { font-weight: 600; }
+.task-list li.done-item { color: #8B7355; text-decoration: line-through; }
+
+/* Back link */
+.back { display: inline-block; font-size: 13px; color: #8B7355; text-decoration: none; margin-bottom: 24px; padding: 6px 16px; border-radius: 16px; border: 1px solid #E8DDD0; }
+.back:hover { background: #2C2418; color: #FAF6F1; border-color: #2C2418; }
+
+.footer { text-align: center; font-size: 12px; color: #B0A898; margin-top: 40px; padding-top: 20px; border-top: 1px solid #E8DDD0; }
 </style>
 </head>
 <body>
 <a class="back" href="index.html">← Dashboard</a>
 <div class="header">
-  <h1>@Aotian</h1>
+  <h1 style="color: var(--accent);">@Aotian</h1>
   <div class="meta">Sprint · 2026.03.18 · Week 12</div>
 </div>
 
-<div class="card">
-  <div class="card-title">知乎爬虫</div>
-  <div class="pipeline">
-    <span class="pipeline-stage active">开发</span>
-    <span class="pipeline-arrow">→</span>
-    <span class="pipeline-stage">测试</span>
-    <span class="pipeline-arrow">→</span>
-    <span class="pipeline-stage">部署</span>
-  </div>
-  <div class="progress-row">
-    <span class="progress-label">Progress</span>
-    <div class="progress-bar"><div class="progress-fill" style="width:40%"></div></div>
-    <span class="progress-pct">40%</span>
-  </div>
-  <div class="info-grid">
-    <span class="info-label">Focus</span><span class="info-value">爬虫核心逻辑开发</span>
-    <span class="info-label">Blocker</span><span class="info-value blocker">知乎反爬机制</span>
-    <span class="info-label">Next</span><span class="info-value">数据清洗 + 存储</span>
-  </div>
-</div>
+
 
 <div class="section-title">All Tasks</div>
 <ul class="task-list">
-  <li class="done">性转克隆体可行性论证 ✓</li>
+  
+  <li class="done-item">性转克隆体可行性论证 ✓</li>
+  
   <li class="urgent">知乎爬虫</li>
+  
   <li class="normal">CENX 研究</li>
+  
 </ul>
 
 <div class="footer">@Aotian · Sprint Dashboard · 高性能ですから！ ✨</div>

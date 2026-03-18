@@ -4,412 +4,145 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Sprint Dashboard · 03.18</title>
-<style>
-  * { margin: 0; padding: 0; box-sizing: border-box; }
+<style>* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: -apple-system, "Helvetica Neue", "PingFang SC", "Hiragino Sans GB", sans-serif; background: #FAF6F1; color: #2C2418; padding: 32px 36px; max-width: 980px; margin: 0 auto; line-height: 1.6; }
+.header { text-align: center; margin-bottom: 24px; padding-bottom: 16px; border-bottom: 2px solid #E8DDD0; }
+.header h1 { font-size: 28px; font-weight: 700; letter-spacing: 1px; }
+.header .meta { font-size: 14px; color: #8B7355; margin-top: 8px; }
+.stats { display: flex; justify-content: center; gap: 24px; margin-top: 16px; }
+.stat-pill { display: inline-flex; align-items: center; gap: 6px; padding: 6px 16px; border-radius: 20px; font-size: 13px; font-weight: 600; }
+.stat-urgent { background: #F5E6E0; color: #8B2E1A; }
+.stat-normal { background: #E0E8F0; color: #2A4A66; }
+.stat-total { background: #E8E0D6; color: #5A4A3A; }
 
-  body {
-    font-family: -apple-system, "Helvetica Neue", "PingFang SC", "Hiragino Sans GB", sans-serif;
-    background: #FAF6F1;
-    color: #2C2418;
-    line-height: 1.6;
-    padding: 32px 36px;
-    max-width: 980px;
-    margin: 0 auto;
-  }
+/* Floating sidebar */
+.float-sidebar { position: fixed; top: 50%; left: 24px; transform: translateY(-50%); width: 120px; background: #2C2418; border-radius: 14px; padding: 20px 16px; display: flex; flex-direction: column; gap: 4px; z-index: 100; box-shadow: 0 4px 20px rgba(0,0,0,0.15); }
+@media (max-width: 900px) { .float-sidebar { display: none; } }
+.float-sidebar-title { font-size: 10px; font-weight: 600; color: #8B7355; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 12px; padding-bottom: 10px; border-bottom: 1px solid #4A3A28; }
+.float-sidebar-link { display: block; font-size: 13px; font-weight: 500; color: #D0C8BC; text-decoration: none; padding: 8px 12px; border-radius: 8px; transition: all 0.15s; }
+.float-sidebar-link:hover { background: #4A3A28; color: #FAF6F1; }
+.float-sidebar-link .dot { display: inline-block; width: 8px; height: 8px; border-radius: 50%; margin-right: 8px; }
+.dot-rust { background: #C4633E; }
+.dot-blue { background: #5A8AB0; }
+.dot-green { background: #6A8B6A; }
+.float-sidebar-footer { margin-top: 12px; padding-top: 10px; border-top: 1px solid #4A3A28; font-size: 10px; color: #5A4A3A; line-height: 1.4; }
 
-  /* Floating Sidebar */
-  .float-sidebar {
-    position: fixed;
-    top: 50%;
-    left: 24px;
-    transform: translateY(-50%);
-    width: 120px;
-    background: #2C2418;
-    border-radius: 14px;
-    padding: 20px 16px;
-    display: flex;
-    flex-direction: column;
-    gap: 4px;
-    z-index: 100;
-    box-shadow: 0 4px 20px rgba(0,0,0,0.15);
-  }
-  @media (max-width: 900px) {
-    .float-sidebar { display: none; }
-  }
-  .float-sidebar-title {
-    font-size: 10px;
-    font-weight: 600;
-    color: #8B7355;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-    margin-bottom: 12px;
-    padding-bottom: 10px;
-    border-bottom: 1px solid #4A3A28;
-  }
-  .float-sidebar-link {
-    display: block;
-    font-size: 13px;
-    font-weight: 500;
-    color: #D0C8BC;
-    text-decoration: none;
-    padding: 8px 12px;
-    border-radius: 8px;
-    transition: all 0.15s;
-  }
-  .float-sidebar-link:hover {
-    background: #4A3A28;
-    color: #FAF6F1;
-  }
-  .float-sidebar-link .dot {
-    display: inline-block;
-    width: 8px;
-    height: 8px;
-    border-radius: 50%;
-    margin-right: 8px;
-  }
-  .dot-rust { background: #C4633E; }
-  .dot-blue { background: #5A8AB0; }
-  .dot-green { background: #6A8B6A; }
-  .float-sidebar-footer {
-    margin-top: 12px;
-    padding-top: 10px;
-    border-top: 1px solid #4A3A28;
-    font-size: 10px;
-    color: #5A4A3A;
-    line-height: 1.4;
-  }
+/* Cards */
+.cards-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 24px; }
+@media (max-width: 700px) { .cards-row { grid-template-columns: 1fr; } }
+.card { background: #FFF; border-radius: 16px; padding: 22px 24px; border: 1px solid #E8DDD0; position: relative; overflow: hidden; }
+.card::before { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 5px; }
+.card.accent-rust::before { background: #C4633E; }
+.card.accent-blue::before { background: #3D6080; }
+.card.accent-green::before { background: #4A6B4A; }
+.card-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 20px; }
+.card-title { font-size: 20px; font-weight: 700; }
+.card.accent-rust .card-title { color: #8B4A2A; }
+.card.accent-blue .card-title { color: #2A4A66; }
+.card.accent-green .card-title { color: #3A5A3A; }
+.owner-tag { font-size: 12px; padding: 4px 12px; border-radius: 12px; font-weight: 600; }
+.card.accent-rust .owner-tag { background: #F5E6E0; color: #8B4A2A; }
+.card.accent-blue .owner-tag { background: #E0E8F0; color: #2A4A66; }
+.card.accent-green .owner-tag { background: #D4E8D0; color: #3A5A3A; }
+.card-desc { font-size: 13px; color: #8B7355; margin-bottom: 20px; }
 
-  /* Header */
-  .header {
-    text-align: center;
-    margin-bottom: 24px;
-    padding-bottom: 16px;
-    border-bottom: 2px solid #E8DDD0;
-  }
-  .header h1 {
-    font-size: 28px;
-    font-weight: 700;
-    color: #2C2418;
-    letter-spacing: 1px;
-  }
-  .header .meta {
-    font-size: 14px;
-    color: #8B7355;
-    margin-top: 8px;
-  }
-  .stats {
-    display: flex;
-    justify-content: center;
-    gap: 24px;
-    margin-top: 16px;
-  }
-  .stat-pill {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    padding: 6px 16px;
-    border-radius: 20px;
-    font-size: 13px;
-    font-weight: 600;
-  }
-  .stat-urgent { background: #F5E6E0; color: #8B2E1A; }
-  .stat-normal { background: #E0E8F0; color: #2A4A66; }
-  .stat-total  { background: #E8E0D6; color: #5A4A3A; }
+/* Pipeline */
+.pipeline { display: flex; align-items: center; margin-bottom: 20px; }
+.pipeline-stage { padding: 6px 16px; font-size: 13px; font-weight: 500; color: #B0A898; border-radius: 6px; }
+.pipeline-stage.active { font-weight: 700; color: #FFF; }
+.card.accent-rust .pipeline-stage.active { background: #C4633E; }
+.card.accent-blue .pipeline-stage.active { background: #3D6080; }
+.card.accent-green .pipeline-stage.active { background: #4A6B4A; }
+.pipeline-stage.done { color: #8B7355; text-decoration: line-through; }
+.pipeline-arrow { color: #D0C8BC; font-size: 14px; margin: 0 4px; }
 
-  /* Project Cards Container */
-  .cards-row {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 16px;
-    margin-bottom: 24px;
-  }
-  @media (max-width: 700px) {
-    .cards-row { grid-template-columns: 1fr; }
-  }
+/* Progress */
+.progress-row { display: flex; align-items: center; gap: 16px; margin-bottom: 20px; }
+.progress-label { font-size: 12px; font-weight: 600; color: #8B7355; text-transform: uppercase; letter-spacing: 1px; min-width: 72px; }
+.progress-bar { flex: 1; height: 12px; background: #E8E0D6; border-radius: 6px; overflow: hidden; }
+.progress-fill { height: 100%; border-radius: 6px; }
+.card.accent-rust .progress-fill { background: linear-gradient(90deg, #C4633E, #D4845A); }
+.card.accent-blue .progress-fill { background: linear-gradient(90deg, #3D6080, #5A8AB0); }
+.card.accent-green .progress-fill { background: linear-gradient(90deg, #4A6B4A, #6A8B6A); }
+.progress-pct { font-size: 14px; font-weight: 700; }
+.card.accent-rust .progress-pct { color: #C4633E; }
+.card.accent-blue .progress-pct { color: #3D6080; }
+.card.accent-green .progress-pct { color: #4A6B4A; }
 
-  /* Project Cards */
-  .card {
-    background: #FFFFFF;
-    border-radius: 16px;
-    padding: 22px 24px;
-    border: 1px solid #E8DDD0;
-    position: relative;
-    overflow: hidden;
-  }
-  .card::before {
-    content: '';
-    position: absolute;
-    left: 0; top: 0; bottom: 0;
-    width: 5px;
-  }
-  .card.accent-rust::before { background: #C4633E; }
-  .card.accent-blue::before { background: #3D6080; }
+/* Info grid */
+.info-grid { display: grid; grid-template-columns: 72px 1fr; gap: 8px 16px; margin-bottom: 20px; }
+.info-label { font-size: 12px; font-weight: 600; color: #8B7355; text-transform: uppercase; letter-spacing: 1px; padding-top: 2px; }
+.info-value { font-size: 14px; }
+.info-value.blocker { color: #8B2E1A; font-weight: 600; }
 
-  .card-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    margin-bottom: 20px;
-  }
-  .card-title {
-    font-size: 20px;
-    font-weight: 700;
-  }
-  .card.accent-rust .card-title { color: #8B4A2A; }
-  .card.accent-blue .card-title { color: #2A4A66; }
+/* Milestones */
+.milestones { list-style: none; }
+.milestones li { font-size: 13px; padding: 4px 0; display: flex; align-items: center; gap: 8px; }
+.ms-icon { width: 20px; height: 20px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 11px; flex-shrink: 0; }
+.ms-done { background: #D4E8D0; color: #3A5A3A; }
+.ms-active { background: #F5E6E0; color: #8B2E1A; font-weight: 700; }
+.ms-todo { background: #E8E0D6; color: #B0A898; }
+.ms-text-done { color: #8B7355; text-decoration: line-through; }
+.ms-text-active { color: #2C2418; font-weight: 600; }
+.ms-text-todo { color: #B0A898; }
 
-  .owner-tag {
-    font-size: 12px;
-    padding: 4px 12px;
-    border-radius: 12px;
-    font-weight: 600;
-  }
-  .card.accent-rust .owner-tag { background: #F5E6E0; color: #8B4A2A; }
-  .card.accent-blue .owner-tag { background: #E0E8F0; color: #2A4A66; }
+/* Section */
+.section-title { font-size: 18px; font-weight: 700; margin: 36px 0 20px; padding-bottom: 12px; border-bottom: 2px solid #E8DDD0; }
 
-  .card-desc {
-    font-size: 13px;
-    color: #8B7355;
-    margin-bottom: 20px;
-  }
+/* Kanban */
+.kanban { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; margin-bottom: 32px; }
+@media (max-width: 600px) { .kanban { grid-template-columns: 1fr; } }
+.kanban-col { background: #F5F0EA; border-radius: 12px; padding: 12px; max-height: 360px; overflow-y: auto; scrollbar-width: none; -ms-overflow-style: none; }
+.kanban-col::-webkit-scrollbar { display: none; }
+.kanban-header { font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 2px; padding: 8px 12px; border-radius: 8px; margin-bottom: 12px; text-align: center; }
+.kanban-todo { background: #F5E6E0; color: #8B2E1A; }
+.kanban-progress { background: #FFF3D6; color: #8B6914; }
+.kanban-done { background: #D4E8D0; color: #3A5A3A; }
+.kanban-card { background: #FFF; border-radius: 8px; padding: 10px 14px; margin-bottom: 8px; font-size: 13px; color: #2C2418; border-left: 3px solid #E8DDD0; box-shadow: 0 1px 3px rgba(0,0,0,0.04); }
+.kanban-card.active { border-left-color: #C4633E; font-weight: 600; }
+.kanban-card.done { border-left-color: #4A6B4A; color: #8B7355; text-decoration: line-through; }
+.kanban-card.dim { color: #B0A898; }
+.kanban-owner { float: right; font-size: 11px; font-weight: 400; color: #8B7355; background: #F5F0EA; padding: 2px 8px; border-radius: 10px; }
 
-  /* Pipeline */
-  .pipeline {
-    display: flex;
-    align-items: center;
-    gap: 0;
-    margin-bottom: 20px;
-  }
-  .pipeline-stage {
-    padding: 6px 16px;
-    font-size: 13px;
-    font-weight: 500;
-    color: #B0A898;
-    border-radius: 6px;
-    transition: all 0.2s;
-  }
-  .pipeline-stage.active {
-    font-weight: 700;
-    color: #FFF;
-  }
-  .card.accent-rust .pipeline-stage.active { background: #C4633E; }
-  .card.accent-blue .pipeline-stage.active { background: #3D6080; }
-  .pipeline-stage.done {
-    color: #8B7355;
-    text-decoration: line-through;
-  }
-  .pipeline-arrow {
-    color: #D0C8BC;
-    font-size: 14px;
-    margin: 0 4px;
-  }
+/* Sprint list */
+.sprint-group { margin-bottom: 20px; }
+.sprint-owner { font-size: 14px; font-weight: 700; color: #5A4A3A; margin-bottom: 8px; }
+.sprint-list { list-style: none; }
+.sprint-list li { font-size: 14px; padding: 6px 0 6px 16px; position: relative; }
+.sprint-list li::before { content: ''; position: absolute; left: 0; top: 50%; transform: translateY(-50%); width: 8px; height: 8px; border-radius: 50%; }
+.sprint-list li.urgent::before { background: #C4633E; }
+.sprint-list li.normal::before { background: #5A8AB0; }
+.sprint-list li.backlog::before { background: #D0C8BC; }
+.sprint-list li.urgent { font-weight: 600; }
 
-  /* Progress */
-  .progress-row {
-    display: flex;
-    align-items: center;
-    gap: 16px;
-    margin-bottom: 20px;
-  }
-  .progress-label {
-    font-size: 12px;
-    font-weight: 600;
-    color: #8B7355;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    min-width: 72px;
-  }
-  .progress-bar {
-    flex: 1;
-    height: 12px;
-    background: #E8E0D6;
-    border-radius: 6px;
-    overflow: hidden;
-  }
-  .progress-fill {
-    height: 100%;
-    border-radius: 6px;
-    transition: width 0.6s ease;
-  }
-  .card.accent-rust .progress-fill { background: linear-gradient(90deg, #C4633E, #D4845A); }
-  .card.accent-blue .progress-fill { background: linear-gradient(90deg, #3D6080, #5A8AB0); }
-  .progress-pct {
-    font-size: 14px;
-    font-weight: 700;
-    min-width: 40px;
-  }
-  .card.accent-rust .progress-pct { color: #C4633E; }
-  .card.accent-blue .progress-pct { color: #3D6080; }
+/* Task list (user pages) */
+.task-list { list-style: none; }
+.task-list li { font-size: 14px; padding: 8px 0 8px 18px; position: relative; }
+.task-list li::before { content: ''; position: absolute; left: 0; top: 50%; transform: translateY(-50%); width: 8px; height: 8px; border-radius: 50%; }
+.task-list li.urgent::before { background: #C4633E; }
+.task-list li.normal::before { background: #5A8AB0; }
+.task-list li.done-item::before { background: #4A6B4A; }
+.task-list li.urgent { font-weight: 600; }
+.task-list li.done-item { color: #8B7355; text-decoration: line-through; }
 
-  /* Info rows */
-  .info-grid {
-    display: grid;
-    grid-template-columns: 72px 1fr;
-    gap: 8px 16px;
-    margin-bottom: 20px;
-  }
-  .info-label {
-    font-size: 12px;
-    font-weight: 600;
-    color: #8B7355;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    padding-top: 2px;
-  }
-  .info-value {
-    font-size: 14px;
-    color: #2C2418;
-  }
-  .info-value.blocker { color: #8B2E1A; font-weight: 600; }
+/* Back link */
+.back { display: inline-block; font-size: 13px; color: #8B7355; text-decoration: none; margin-bottom: 24px; padding: 6px 16px; border-radius: 16px; border: 1px solid #E8DDD0; }
+.back:hover { background: #2C2418; color: #FAF6F1; border-color: #2C2418; }
 
-  /* Milestones */
-  .milestones {
-    list-style: none;
-    padding: 0;
-  }
-  .milestones li {
-    font-size: 13px;
-    padding: 4px 0;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-  }
-  .ms-icon {
-    width: 20px;
-    height: 20px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 11px;
-    flex-shrink: 0;
-  }
-  .ms-done { background: #D4E8D0; color: #3A5A3A; }
-  .ms-active { background: #F5E6E0; color: #8B2E1A; font-weight: 700; }
-  .ms-todo { background: #E8E0D6; color: #B0A898; }
-  .ms-text-done { color: #8B7355; text-decoration: line-through; }
-  .ms-text-active { color: #2C2418; font-weight: 600; }
-  .ms-text-todo { color: #B0A898; }
-
-  /* Sprint Board */
-  .section-title {
-    font-size: 18px;
-    font-weight: 700;
-    color: #2C2418;
-    margin: 36px 0 20px;
-    padding-bottom: 12px;
-    border-bottom: 2px solid #E8DDD0;
-  }
-
-  .sprint-group {
-    margin-bottom: 20px;
-  }
-  .sprint-owner {
-    font-size: 14px;
-    font-weight: 700;
-    color: #5A4A3A;
-    margin-bottom: 8px;
-  }
-  .sprint-list {
-    list-style: none;
-    padding: 0;
-  }
-  .sprint-list li {
-    font-size: 14px;
-    padding: 6px 0 6px 16px;
-    position: relative;
-  }
-  .sprint-list li::before {
-    content: '';
-    position: absolute;
-    left: 0;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 8px;
-    height: 8px;
-    border-radius: 50%;
-  }
-  .sprint-list li.urgent::before { background: #C4633E; }
-  .sprint-list li.normal::before { background: #5A8AB0; }
-  .sprint-list li.backlog::before { background: #D0C8BC; }
-  .sprint-list li.urgent { font-weight: 600; }
-
-  /* Kanban */
-  .kanban {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    gap: 16px;
-    margin-bottom: 32px;
-  }
-  @media (max-width: 600px) {
-    .kanban { grid-template-columns: 1fr; }
-  }
-  .kanban-col {
-    background: #F5F0EA;
-    border-radius: 12px;
-    padding: 12px;
-    max-height: 360px;
-    overflow-y: auto;
-    scrollbar-width: none;
-    -ms-overflow-style: none;
-  }
-  .kanban-col::-webkit-scrollbar { display: none; }
-
-
-  .kanban-header {
-    font-size: 12px;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-    padding: 8px 12px;
-    border-radius: 8px;
-    margin-bottom: 12px;
-    text-align: center;
-  }
-  .kanban-todo { background: #F5E6E0; color: #8B2E1A; }
-  .kanban-progress { background: #FFF3D6; color: #8B6914; }
-  .kanban-done { background: #D4E8D0; color: #3A5A3A; }
-  .kanban-card {
-    background: #FFFFFF;
-    border-radius: 8px;
-    padding: 10px 14px;
-    margin-bottom: 8px;
-    font-size: 13px;
-    color: #2C2418;
-    border-left: 3px solid #E8DDD0;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.04);
-  }
-  .kanban-card.active { border-left-color: #C4633E; font-weight: 600; }
-  .kanban-card.done { border-left-color: #4A6B4A; color: #8B7355; text-decoration: line-through; }
-  .kanban-card.dim { color: #B0A898; }
-  .kanban-owner {
-    float: right;
-    font-size: 11px;
-    font-weight: 400;
-    color: #8B7355;
-    background: #F5F0EA;
-    padding: 2px 8px;
-    border-radius: 10px;
-  }
-
-  /* Footer */
-  .footer {
-    text-align: center;
-    font-size: 12px;
-    color: #B0A898;
-    margin-top: 40px;
-    padding-top: 20px;
-    border-top: 1px solid #E8DDD0;
-  }
+.footer { text-align: center; font-size: 12px; color: #B0A898; margin-top: 40px; padding-top: 20px; border-top: 1px solid #E8DDD0; }
 </style>
 </head>
 <body>
 
 <nav class="float-sidebar">
   <div class="float-sidebar-title">Team</div>
+  
   <a class="float-sidebar-link" href="kieran.html"><span class="dot dot-rust"></span>Kieran</a>
+  
   <a class="float-sidebar-link" href="shine.html"><span class="dot dot-blue"></span>Shine</a>
+  
   <a class="float-sidebar-link" href="aotian.html"><span class="dot dot-green"></span>Aotian</a>
+  
   <div class="float-sidebar-footer">Sprint W12<br>03.18 Wed</div>
 </nav>
 
@@ -418,176 +151,253 @@
   <div class="meta">GPUWatch · 2026.03.18 Wednesday · Week 12</div>
   <div class="stats">
     <span class="stat-pill stat-urgent">5 urgent</span>
-    <span class="stat-pill stat-normal">6 two-week</span>
-    <span class="stat-pill stat-total">17 total</span>
-  </div>
-  </div>
+    <span class="stat-pill stat-normal">10 two-week</span>
+    <span class="stat-pill stat-total">21 total</span>
   </div>
 </div>
 
 <div class="cards-row">
-<!-- gpu-price-tracker -->
+
 <div class="card accent-rust">
   <div class="card-header">
     <div class="card-title">gpu-price-tracker</div>
     <span class="owner-tag">@Kieran</span>
   </div>
   <div class="card-desc">GPU 价格 & 库存监控工具</div>
-
   <div class="pipeline">
+    
     <span class="pipeline-stage done">采集</span>
     <span class="pipeline-arrow">→</span>
+    
     <span class="pipeline-stage active">分析</span>
     <span class="pipeline-arrow">→</span>
-    <span class="pipeline-stage">展示</span>
+    
+    <span class="pipeline-stage ">展示</span>
     <span class="pipeline-arrow">→</span>
-    <span class="pipeline-stage">变现</span>
+    
+    <span class="pipeline-stage ">变现</span>
+    
+    
   </div>
-
   <div class="progress-row">
     <span class="progress-label">Progress</span>
     <div class="progress-bar"><div class="progress-fill" style="width:35%"></div></div>
     <span class="progress-pct">35%</span>
   </div>
-
   <div class="info-grid">
-    <span class="info-label">Focus</span>
-    <span class="info-value">GitHub 建库 / Scraper 接入</span>
-    <span class="info-label">Blocker</span>
-    <span class="info-value blocker">Newegg anti-bot 反爬</span>
-    <span class="info-label">Next</span>
-    <span class="info-value">Akash 链上数据源 + CI 部署</span>
+    <span class="info-label">Focus</span><span class="info-value">GitHub 建库 / Scraper 接入</span>
+    <span class="info-label">Blocker</span><span class="info-value blocker">Newegg anti-bot 反爬</span>
+    <span class="info-label">Next</span><span class="info-value">Akash 链上数据源 + CI 部署</span>
   </div>
-
   <ul class="milestones">
-    <li><span class="ms-icon ms-done">✓</span><span class="ms-text-done">脚本原型完成</span></li>
-    <li><span class="ms-icon ms-done">✓</span><span class="ms-text-done">拆分为 repo 结构</span></li>
-    <li><span class="ms-icon ms-active">→</span><span class="ms-text-active">GitHub 建库</span></li>
-    <li><span class="ms-icon ms-todo">·</span><span class="ms-text-todo">Akash 数据源</span></li>
-    <li><span class="ms-icon ms-todo">·</span><span class="ms-text-todo">Dashboard MVP</span></li>
+    
+    <li>
+      <span class="ms-icon ms-done">✓</span><span class="ms-text-done">脚本原型完成</span>
+      
+    </li>
+    
+    <li>
+      <span class="ms-icon ms-done">✓</span><span class="ms-text-done">拆分为 repo 结构</span>
+      
+    </li>
+    
+    <li>
+      <span class="ms-icon ms-active">→</span><span class="ms-text-active">GitHub 建库</span>
+      
+    </li>
+    
+    <li>
+      <span class="ms-icon ms-todo">·</span><span class="ms-text-todo">Akash 数据源</span>
+    </li>
+    
+    <li>
+      <span class="ms-icon ms-todo">·</span><span class="ms-text-todo">Dashboard MVP</span>
+    </li>
+    
   </ul>
 </div>
 
-<!-- voice-model -->
 <div class="card accent-blue">
   <div class="card-header">
     <div class="card-title">voice-model</div>
     <span class="owner-tag">@Shine</span>
   </div>
   <div class="card-desc">ATRI 语音模型训练 & 部署</div>
-
   <div class="pipeline">
+    
     <span class="pipeline-stage active">选型</span>
     <span class="pipeline-arrow">→</span>
-    <span class="pipeline-stage">训练</span>
+    
+    <span class="pipeline-stage ">训练</span>
     <span class="pipeline-arrow">→</span>
-    <span class="pipeline-stage">部署</span>
+    
+    <span class="pipeline-stage ">部署</span>
     <span class="pipeline-arrow">→</span>
-    <span class="pipeline-stage">集成</span>
+    
+    <span class="pipeline-stage ">集成</span>
+    
+    
   </div>
-
   <div class="progress-row">
     <span class="progress-label">Progress</span>
     <div class="progress-bar"><div class="progress-fill" style="width:15%"></div></div>
     <span class="progress-pct">15%</span>
   </div>
-
   <div class="info-grid">
-    <span class="info-label">Focus</span>
-    <span class="info-value">RVC vs Fish Audio S2 选型</span>
-    <span class="info-label">Blocker</span>
-    <span class="info-value blocker">预训练模型下载中</span>
-    <span class="info-label">Next</span>
-    <span class="info-value">跑通第一条 demo 音频</span>
+    <span class="info-label">Focus</span><span class="info-value">RVC vs Fish Audio S2 选型</span>
+    <span class="info-label">Blocker</span><span class="info-value blocker">预训练模型下载中</span>
+    <span class="info-label">Next</span><span class="info-value">跑通第一条 demo 音频</span>
   </div>
-
   <ul class="milestones">
-    <li><span class="ms-icon ms-done">✓</span><span class="ms-text-done">GPT-SoVITS 基础 TTS 在线</span></li>
-    <li><span class="ms-icon ms-active">→</span><span class="ms-text-active">RVC / Fish Audio S2 评估</span></li>
-    <li><span class="ms-icon ms-todo">·</span><span class="ms-text-todo">训练数据准备</span></li>
-    <li><span class="ms-icon ms-todo">·</span><span class="ms-text-todo">模型训练</span></li>
-    <li><span class="ms-icon ms-todo">·</span><span class="ms-text-todo">部署上线</span></li>
+    
+    <li>
+      <span class="ms-icon ms-done">✓</span><span class="ms-text-done">GPT-SoVITS 基础 TTS 在线</span>
+      
+    </li>
+    
+    <li>
+      <span class="ms-icon ms-active">→</span><span class="ms-text-active">RVC / Fish Audio S2 评估</span>
+      
+    </li>
+    
+    <li>
+      <span class="ms-icon ms-todo">·</span><span class="ms-text-todo">训练数据准备</span>
+    </li>
+    
+    <li>
+      <span class="ms-icon ms-todo">·</span><span class="ms-text-todo">模型训练</span>
+    </li>
+    
+    <li>
+      <span class="ms-icon ms-todo">·</span><span class="ms-text-todo">部署上线</span>
+    </li>
+    
   </ul>
 </div>
 
-</div><!-- end cards-row -->
+</div>
 
 <div class="kanban">
   <div class="kanban-col">
     <div class="kanban-header kanban-todo">TODO</div>
-    <div class="kanban-card">Akash 数据源接入</div>
-    <div class="kanban-card">套利信号 TG Bot</div>
-    <div class="kanban-card">README 文档</div>
-    <div class="kanban-card">RVC 训练</div>
-    <div class="kanban-card">Fish Audio S2</div>
-    <div class="kanban-card">CENX 研究</div>
+    
+    <div class="kanban-card ">Akash 数据源接入</div>
+    
+    <div class="kanban-card ">套利信号 TG Bot</div>
+    
+    <div class="kanban-card ">README 文档</div>
+    
+    <div class="kanban-card ">RVC 训练</div>
+    
+    <div class="kanban-card ">Fish Audio S2</div>
+    
+    <div class="kanban-card ">CENX 研究</div>
+    
     <div class="kanban-card dim">Dashboard MVP</div>
+    
     <div class="kanban-card dim">开源推广</div>
+    
     <div class="kanban-card dim">算力预言机</div>
+    
   </div>
   <div class="kanban-col">
     <div class="kanban-header kanban-progress">IN PROGRESS</div>
+    
     <div class="kanban-card active">GitHub 建库 <span class="kanban-owner">@Kieran</span></div>
+    
     <div class="kanban-card active">知乎爬虫 <span class="kanban-owner">@Aotian</span></div>
+    
     <div class="kanban-card active">RVC vs Fish Audio 选型 <span class="kanban-owner">@Shine</span></div>
+    
   </div>
   <div class="kanban-col">
     <div class="kanban-header kanban-done">DONE</div>
+    
     <div class="kanban-card done">脚本原型 ✓</div>
+    
     <div class="kanban-card done">Repo 结构拆分 ✓</div>
+    
     <div class="kanban-card done">性转克隆体论证 ✓</div>
+    
     <div class="kanban-card done">GPT-SoVITS TTS ✓</div>
+    
     <div class="kanban-card done">Dashboard 上线 ✓</div>
+    
   </div>
 </div>
 
-<!-- Sprint Board -->
 <div class="section-title">Sprint Board</div>
 
 <div class="sprint-group">
-  <div class="sprint-owner" id="kieran">@Kieran</div>
+  <div class="sprint-owner">@Kieran</div>
   <ul class="sprint-list">
-    <li class="urgent">GitHub 建库</li>
+    
+    <li class="urgent">GitHub 建库 ✓</li>
+    
     <li class="urgent">Akash 数据源接入</li>
+    
     <li class="normal">套利信号 TG Bot</li>
+    
+    <li class="normal">Dashboard MVP · FastAPI</li>
+    
+    <li class="normal">数据分析 · 周期&价差</li>
+    
   </ul>
 </div>
 
 <div class="sprint-group">
-  <div class="sprint-owner" id="shine">@Shine</div>
+  <div class="sprint-owner">@Shine</div>
   <ul class="sprint-list">
+    
+    <li class="normal">GPT-SoVITS TTS 在线 ✓</li>
+    
     <li class="urgent">README 文档</li>
+    
     <li class="normal">RVC 训练</li>
+    
     <li class="normal">Fish Audio S2 评估</li>
+    
+    <li class="normal">Mortal HuggingFace 开源</li>
+    
   </ul>
 </div>
 
 <div class="sprint-group">
-  <div class="sprint-owner" id="aotian">@Aotian</div>
+  <div class="sprint-owner">@Aotian</div>
   <ul class="sprint-list">
+    
+    <li class="urgent">性转克隆体可行性论证 ✓</li>
+    
     <li class="urgent">知乎爬虫</li>
-    <li class="urgent">性转克隆体可行性论证</li>
+    
     <li class="normal">CENX 研究</li>
+    
   </ul>
 </div>
 
 <div class="sprint-group">
   <div class="sprint-owner">@All</div>
   <ul class="sprint-list">
+    
     <li class="normal">Dashboard MVP · FastAPI</li>
+    
     <li class="normal">数据分析 · 周期&价差</li>
+    
     <li class="backlog">开源推广 · HN/Reddit/V2EX</li>
+    
     <li class="backlog">Blog: 30 days of GPU tracking</li>
+    
     <li class="backlog">MiroFish 仿真首跑</li>
+    
     <li class="backlog">算力预言机</li>
+    
     <li class="backlog">模型 hash 上链 PoC</li>
+    
     <li class="backlog">算力标准合约设计</li>
+    
   </ul>
 </div>
 
-<div class="footer">
-  Generated by ATRI Sprint Bot · 高性能ですから！ ✨
-</div>
-
+<div class="footer">Generated by ATRI Sprint Bot · 高性能ですから！ ✨</div>
 </body>
 </html>

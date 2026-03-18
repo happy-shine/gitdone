@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>@{{ user.name }} · Sprint</title>
+<style>{{ css }}</style>
+</head>
+<body>
+<a class="back" href="index.html">← Dashboard</a>
+<div class="header">
+  <h1 style="color: var(--accent);">@{{ user.name }}</h1>
+  <div class="meta">Sprint · 2026.{{ sprint }} · Week {{ week }}</div>
+</div>
+
+{% if project %}
+<div class="card accent-{{ user.accent }}">
+  <div class="card-title" style="margin-bottom:16px;">{{ project.name }}</div>
+  <div class="pipeline">
+    {% for i, stage in enumerate(project.pipeline) %}
+    <span class="pipeline-stage {% if i < project.current_stage %}done{% elif i == project.current_stage %}active{% endif %}">{{ stage }}</span>
+    {% if not loop.last %}<span class="pipeline-arrow">→</span>{% endif %}
+    {% endfor %}
+  </div>
+  <div class="progress-row">
+    <span class="progress-label">Progress</span>
+    <div class="progress-bar"><div class="progress-fill" style="width:{{ project.progress }}%"></div></div>
+    <span class="progress-pct">{{ project.progress }}%</span>
+  </div>
+  <div class="info-grid">
+    <span class="info-label">Focus</span><span class="info-value">{{ project.focus }}</span>
+    <span class="info-label">Blocker</span><span class="info-value blocker">{{ project.blocker }}</span>
+    <span class="info-label">Next</span><span class="info-value">{{ project.next }}</span>
+  </div>
+  {% if project.milestones %}
+  <ul class="milestones">
+    {% for m in project.milestones %}
+    <li>
+      {% if m.status == 'done' %}<span class="ms-icon ms-done">✓</span><span class="ms-text-done">{{ m.text }}</span>
+      {% elif m.status == 'active' %}<span class="ms-icon ms-active">→</span><span class="ms-text-active">{{ m.text }}</span>
+      {% else %}<span class="ms-icon ms-todo">·</span><span class="ms-text-todo">{{ m.text }}</span>{% endif %}
+    </li>
+    {% endfor %}
+  </ul>
+  {% endif %}
+</div>
+{% endif %}
+
+<div class="section-title">All Tasks</div>
+<ul class="task-list">
+  {% for t in user.tasks %}
+  <li class="{% if t.done %}done-item{% elif t.priority == 'urgent' %}urgent{% else %}normal{% endif %}">{{ t.text }}{% if t.done %} ✓{% endif %}</li>
+  {% endfor %}
+</ul>
+
+<div class="footer">@{{ user.name }} · Sprint Dashboard · 高性能ですから！ ✨</div>
+</body>
+</html>

@@ -1,0 +1,119 @@
+{
+  "sprint": "03.18",
+  "week": 12,
+  "weekday": "Wednesday",
+  "projects": [
+    {
+      "name": "gpu-price-tracker",
+      "owner": "Kieran",
+      "accent": "rust",
+      "desc": "GPU 价格 & 库存监控工具",
+      "pipeline": ["采集", "分析", "展示", "变现"],
+      "current_stage": 1,
+      "progress": 35,
+      "focus": "GitHub 建库 / Scraper 接入",
+      "blocker": "Newegg anti-bot 反爬",
+      "next": "Akash 链上数据源 + CI 部署",
+      "milestones": [
+        {"status": "done", "text": "脚本原型完成"},
+        {"status": "done", "text": "拆分为 repo 结构"},
+        {"status": "active", "text": "GitHub 建库"},
+        {"status": "todo", "text": "Akash 数据源"},
+        {"status": "todo", "text": "Dashboard MVP"}
+      ]
+    },
+    {
+      "name": "voice-model",
+      "owner": "Shine",
+      "accent": "blue",
+      "desc": "ATRI 语音模型训练 & 部署",
+      "pipeline": ["选型", "训练", "部署", "集成"],
+      "current_stage": 0,
+      "progress": 15,
+      "focus": "RVC vs Fish Audio S2 选型",
+      "blocker": "预训练模型下载中",
+      "next": "跑通第一条 demo 音频",
+      "milestones": [
+        {"status": "done", "text": "GPT-SoVITS 基础 TTS 在线"},
+        {"status": "active", "text": "RVC / Fish Audio S2 评估"},
+        {"status": "todo", "text": "训练数据准备"},
+        {"status": "todo", "text": "模型训练"},
+        {"status": "todo", "text": "部署上线"}
+      ]
+    }
+  ],
+  "users": [
+    {
+      "id": "kieran",
+      "name": "Kieran",
+      "accent": "rust",
+      "project": "gpu-price-tracker",
+      "tasks": [
+        {"text": "GitHub 建库", "priority": "urgent", "done": true},
+        {"text": "Akash 数据源接入", "priority": "urgent", "done": false},
+        {"text": "套利信号 TG Bot", "priority": "normal", "done": false},
+        {"text": "Dashboard MVP · FastAPI", "priority": "normal", "done": false},
+        {"text": "数据分析 · 周期&价差", "priority": "normal", "done": false}
+      ]
+    },
+    {
+      "id": "shine",
+      "name": "Shine",
+      "accent": "blue",
+      "project": "voice-model",
+      "tasks": [
+        {"text": "GPT-SoVITS TTS 在线", "priority": "normal", "done": true},
+        {"text": "README 文档", "priority": "urgent", "done": false},
+        {"text": "RVC 训练", "priority": "normal", "done": false},
+        {"text": "Fish Audio S2 评估", "priority": "normal", "done": false},
+        {"text": "Mortal HuggingFace 开源", "priority": "normal", "done": false}
+      ]
+    },
+    {
+      "id": "aotian",
+      "name": "Aotian",
+      "accent": "green",
+      "project": null,
+      "tasks": [
+        {"text": "性转克隆体可行性论证", "priority": "urgent", "done": true},
+        {"text": "知乎爬虫", "priority": "urgent", "done": false},
+        {"text": "CENX 研究", "priority": "normal", "done": false}
+      ]
+    }
+  ],
+  "kanban": {
+    "todo": [
+      {"text": "Akash 数据源接入"},
+      {"text": "套利信号 TG Bot"},
+      {"text": "README 文档"},
+      {"text": "RVC 训练"},
+      {"text": "Fish Audio S2"},
+      {"text": "CENX 研究"},
+      {"text": "Dashboard MVP", "dim": true},
+      {"text": "开源推广", "dim": true},
+      {"text": "算力预言机", "dim": true}
+    ],
+    "in_progress": [
+      {"text": "GitHub 建库", "owner": "Kieran"},
+      {"text": "知乎爬虫", "owner": "Aotian"},
+      {"text": "RVC vs Fish Audio 选型", "owner": "Shine"}
+    ],
+    "done": [
+      {"text": "脚本原型"},
+      {"text": "Repo 结构拆分"},
+      {"text": "性转克隆体论证"},
+      {"text": "GPT-SoVITS TTS"},
+      {"text": "Dashboard 上线"}
+    ]
+  },
+  "backlog": [
+    {"text": "Dashboard MVP · FastAPI", "priority": "normal"},
+    {"text": "数据分析 · 周期&价差", "priority": "normal"},
+    {"text": "开源推广 · HN/Reddit/V2EX", "priority": "backlog"},
+    {"text": "Blog: 30 days of GPU tracking", "priority": "backlog"},
+    {"text": "MiroFish 仿真首跑", "priority": "backlog"},
+    {"text": "算力预言机", "priority": "backlog"},
+    {"text": "模型 hash 上链 PoC", "priority": "backlog"},
+    {"text": "算力标准合约设计", "priority": "backlog"}
+  ]
+}
