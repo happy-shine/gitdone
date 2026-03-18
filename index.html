@@ -262,6 +262,58 @@
   .sprint-list li.backlog::before { background: #D0C8BC; }
   .sprint-list li.urgent { font-weight: 600; }
 
+  /* Kanban */
+  .kanban {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 16px;
+    margin-bottom: 32px;
+  }
+  @media (max-width: 600px) {
+    .kanban { grid-template-columns: 1fr; }
+  }
+  .kanban-col {
+    background: #F5F0EA;
+    border-radius: 12px;
+    padding: 12px;
+    min-height: 200px;
+  }
+  .kanban-header {
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    padding: 8px 12px;
+    border-radius: 8px;
+    margin-bottom: 12px;
+    text-align: center;
+  }
+  .kanban-todo { background: #F5E6E0; color: #8B2E1A; }
+  .kanban-progress { background: #FFF3D6; color: #8B6914; }
+  .kanban-done { background: #D4E8D0; color: #3A5A3A; }
+  .kanban-card {
+    background: #FFFFFF;
+    border-radius: 8px;
+    padding: 10px 14px;
+    margin-bottom: 8px;
+    font-size: 13px;
+    color: #2C2418;
+    border-left: 3px solid #E8DDD0;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+  }
+  .kanban-card.active { border-left-color: #C4633E; font-weight: 600; }
+  .kanban-card.done { border-left-color: #4A6B4A; color: #8B7355; text-decoration: line-through; }
+  .kanban-card.dim { color: #B0A898; }
+  .kanban-owner {
+    float: right;
+    font-size: 11px;
+    font-weight: 400;
+    color: #8B7355;
+    background: #F5F0EA;
+    padding: 2px 8px;
+    border-radius: 10px;
+  }
+
   /* Footer */
   .footer {
     text-align: center;
@@ -367,6 +419,38 @@
     <li><span class="ms-icon ms-todo">·</span><span class="ms-text-todo">模型训练</span></li>
     <li><span class="ms-icon ms-todo">·</span><span class="ms-text-todo">部署上线</span></li>
   </ul>
+</div>
+
+<!-- Kanban Board -->
+<div class="section-title">Kanban Board</div>
+
+<div class="kanban">
+  <div class="kanban-col">
+    <div class="kanban-header kanban-todo">TODO</div>
+    <div class="kanban-card">Akash 数据源接入</div>
+    <div class="kanban-card">套利信号 TG Bot</div>
+    <div class="kanban-card">README 文档</div>
+    <div class="kanban-card">RVC 训练</div>
+    <div class="kanban-card">Fish Audio S2</div>
+    <div class="kanban-card">CENX 研究</div>
+    <div class="kanban-card dim">Dashboard MVP</div>
+    <div class="kanban-card dim">开源推广</div>
+    <div class="kanban-card dim">算力预言机</div>
+  </div>
+  <div class="kanban-col">
+    <div class="kanban-header kanban-progress">IN PROGRESS</div>
+    <div class="kanban-card active">GitHub 建库 <span class="kanban-owner">@Kieran</span></div>
+    <div class="kanban-card active">知乎爬虫 <span class="kanban-owner">@Aotian</span></div>
+    <div class="kanban-card active">RVC vs Fish Audio 选型 <span class="kanban-owner">@Shine</span></div>
+  </div>
+  <div class="kanban-col">
+    <div class="kanban-header kanban-done">DONE</div>
+    <div class="kanban-card done">脚本原型 ✓</div>
+    <div class="kanban-card done">Repo 结构拆分 ✓</div>
+    <div class="kanban-card done">性转克隆体论证 ✓</div>
+    <div class="kanban-card done">GPT-SoVITS TTS ✓</div>
+    <div class="kanban-card done">Dashboard 上线 ✓</div>
+  </div>
 </div>
 
 <!-- Sprint Board -->
