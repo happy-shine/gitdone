@@ -17,31 +17,49 @@
     margin: 0 auto;
   }
 
-  /* User Nav */
-  .user-nav {
-    display: flex;
-    justify-content: center;
-    gap: 16px;
-    margin-top: 16px;
-  }
-  .user-btn {
-    font-size: 13px;
-    font-weight: 600;
-    color: #5A4A3A;
-    text-decoration: none;
-    padding: 8px 24px;
-    border-radius: 20px;
-    background: #FFFFFF;
-    border: 1.5px solid #E8DDD0;
-    transition: all 0.2s;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.04);
-  }
-  .user-btn:hover {
+  /* Floating Sidebar */
+  .float-sidebar {
+    position: fixed;
+    top: 32px;
+    left: 24px;
+    width: 120px;
     background: #2C2418;
-    color: #FAF6F1;
-    border-color: #2C2418;
+    border-radius: 14px;
+    padding: 20px 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    z-index: 100;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.15);
   }
-  .user-btn .dot {
+  @media (max-width: 900px) {
+    .float-sidebar { display: none; }
+  }
+  .float-sidebar-title {
+    font-size: 10px;
+    font-weight: 600;
+    color: #8B7355;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-bottom: 12px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #4A3A28;
+  }
+  .float-sidebar-link {
+    display: block;
+    font-size: 13px;
+    font-weight: 500;
+    color: #D0C8BC;
+    text-decoration: none;
+    padding: 8px 12px;
+    border-radius: 8px;
+    transition: all 0.15s;
+  }
+  .float-sidebar-link:hover {
+    background: #4A3A28;
+    color: #FAF6F1;
+  }
+  .float-sidebar-link .dot {
     display: inline-block;
     width: 8px;
     height: 8px;
@@ -51,6 +69,14 @@
   .dot-rust { background: #C4633E; }
   .dot-blue { background: #5A8AB0; }
   .dot-green { background: #6A8B6A; }
+  .float-sidebar-footer {
+    margin-top: 12px;
+    padding-top: 10px;
+    border-top: 1px solid #4A3A28;
+    font-size: 10px;
+    color: #5A4A3A;
+    line-height: 1.4;
+  }
 
   /* Header */
   .header {
@@ -378,6 +404,14 @@
 </head>
 <body>
 
+<nav class="float-sidebar">
+  <div class="float-sidebar-title">Team</div>
+  <a class="float-sidebar-link" href="kieran.html"><span class="dot dot-rust"></span>Kieran</a>
+  <a class="float-sidebar-link" href="shine.html"><span class="dot dot-blue"></span>Shine</a>
+  <a class="float-sidebar-link" href="aotian.html"><span class="dot dot-green"></span>Aotian</a>
+  <div class="float-sidebar-footer">Sprint W12<br>03.18 Wed</div>
+</nav>
+
 <div class="header">
   <h1>Sprint Dashboard</h1>
   <div class="meta">GPUWatch · 2026.03.18 Wednesday · Week 12</div>
@@ -387,10 +421,6 @@
     <span class="stat-pill stat-total">17 total</span>
   </div>
   </div>
-  <div class="user-nav">
-    <a class="user-btn" href="kieran.html"><span class="dot dot-rust"></span>Kieran</a>
-    <a class="user-btn" href="shine.html"><span class="dot dot-blue"></span>Shine</a>
-    <a class="user-btn" href="aotian.html"><span class="dot dot-green"></span>Aotian</a>
   </div>
 </div>
 
