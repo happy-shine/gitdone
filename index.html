@@ -16,22 +16,24 @@
     padding: 0;
   }
   .layout {
-    display: grid;
-    grid-template-columns: 140px 1fr;
+    margin-left: 140px;
   }
   @media (max-width: 700px) {
-    .layout { grid-template-columns: 1fr; }
     .sidebar { display: none; }
+    .layout { margin-left: 0; }
   }
   .sidebar {
     background: #2C2418;
     padding: 24px 16px;
-    position: sticky;
+    position: fixed;
     top: 0;
+    left: 0;
+    width: 140px;
     height: 100vh;
     display: flex;
     flex-direction: column;
     gap: 4px;
+    z-index: 10;
   }
   .sidebar-title {
     font-size: 11px;
