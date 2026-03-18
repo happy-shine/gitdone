@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>@Kieran · Sprint</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: -apple-system, "Helvetica Neue", "PingFang SC", sans-serif; background: #FAF6F1; color: #2C2418; padding: 32px 24px; max-width: 800px; margin: 0 auto; line-height: 1.6; }
+  .back { display: inline-block; font-size: 13px; color: #8B7355; text-decoration: none; margin-bottom: 24px; padding: 6px 16px; border-radius: 16px; border: 1px solid #E8DDD0; }
+  .back:hover { background: #2C2418; color: #FAF6F1; border-color: #2C2418; }
+  .header { margin-bottom: 32px; padding-bottom: 20px; border-bottom: 2px solid #E8DDD0; }
+  .header h1 { font-size: 24px; color: #8B4A2A; }
+  .header .meta { font-size: 13px; color: #8B7355; margin-top: 4px; }
+  .card { background: #FFF; border-radius: 16px; padding: 24px 28px; margin-bottom: 20px; border: 1px solid #E8DDD0; position: relative; overflow: hidden; }
+  .card::before { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 5px; background: #C4633E; }
+  .card-title { font-size: 16px; font-weight: 700; color: #8B4A2A; margin-bottom: 16px; }
+  .pipeline { display: flex; align-items: center; gap: 0; margin-bottom: 16px; }
+  .pipeline-stage { padding: 5px 14px; font-size: 12px; font-weight: 500; color: #B0A898; border-radius: 6px; }
+  .pipeline-stage.active { font-weight: 700; color: #FFF; background: #C4633E; }
+  .pipeline-stage.done { color: #8B7355; text-decoration: line-through; }
+  .pipeline-arrow { color: #D0C8BC; font-size: 13px; margin: 0 4px; }
+  .progress-row { display: flex; align-items: center; gap: 14px; margin-bottom: 16px; }
+  .progress-label { font-size: 11px; font-weight: 600; color: #8B7355; text-transform: uppercase; letter-spacing: 1px; min-width: 68px; }
+  .progress-bar { flex: 1; height: 10px; background: #E8E0D6; border-radius: 5px; overflow: hidden; }
+  .progress-fill { height: 100%; border-radius: 5px; background: linear-gradient(90deg, #C4633E, #D4845A); }
+  .progress-pct { font-size: 13px; font-weight: 700; color: #C4633E; }
+  .info-grid { display: grid; grid-template-columns: 68px 1fr; gap: 6px 14px; margin-bottom: 16px; }
+  .info-label { font-size: 11px; font-weight: 600; color: #8B7355; text-transform: uppercase; letter-spacing: 1px; }
+  .info-value { font-size: 13px; }
+  .info-value.blocker { color: #8B2E1A; font-weight: 600; }
+  .milestones { list-style: none; }
+  .milestones li { font-size: 12px; padding: 3px 0; display: flex; align-items: center; gap: 8px; }
+  .ms-icon { width: 18px; height: 18px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 10px; flex-shrink: 0; }
+  .ms-done { background: #D4E8D0; color: #3A5A3A; }
+  .ms-active { background: #F5E6E0; color: #8B2E1A; font-weight: 700; }
+  .ms-todo { background: #E8E0D6; color: #B0A898; }
+  .ms-text-done { color: #8B7355; text-decoration: line-through; }
+  .ms-text-active { color: #2C2418; font-weight: 600; }
+  .ms-text-todo { color: #B0A898; }
+  .section-title { font-size: 16px; font-weight: 700; margin: 28px 0 16px; padding-bottom: 10px; border-bottom: 2px solid #E8DDD0; }
+  .task-list { list-style: none; }
+  .task-list li { font-size: 14px; padding: 8px 0 8px 18px; position: relative; }
+  .task-list li::before { content: ''; position: absolute; left: 0; top: 50%; transform: translateY(-50%); width: 8px; height: 8px; border-radius: 50%; }
+  .task-list li.urgent::before { background: #C4633E; }
+  .task-list li.normal::before { background: #5A8AB0; }
+  .task-list li.done::before { background: #4A6B4A; }
+  .task-list li.urgent { font-weight: 600; }
+  .task-list li.done { color: #8B7355; text-decoration: line-through; }
+  .footer { text-align: center; font-size: 12px; color: #B0A898; margin-top: 40px; padding-top: 20px; border-top: 1px solid #E8DDD0; }
+</style>
+</head>
+<body>
+<a class="back" href="index.html">← Dashboard</a>
+<div class="header">
+  <h1>@Kieran</h1>
+  <div class="meta">Sprint · 2026.03.18 · Week 12</div>
+</div>
+
+<div class="card">
+  <div class="card-title">gpu-price-tracker</div>
+  <div class="pipeline">
+    <span class="pipeline-stage done">采集</span>
+    <span class="pipeline-arrow">→</span>
+    <span class="pipeline-stage active">分析</span>
+    <span class="pipeline-arrow">→</span>
+    <span class="pipeline-stage">展示</span>
+    <span class="pipeline-arrow">→</span>
+    <span class="pipeline-stage">变现</span>
+  </div>
+  <div class="progress-row">
+    <span class="progress-label">Progress</span>
+    <div class="progress-bar"><div class="progress-fill" style="width:35%"></div></div>
+    <span class="progress-pct">35%</span>
+  </div>
+  <div class="info-grid">
+    <span class="info-label">Focus</span><span class="info-value">GitHub 建库 / Scraper 接入</span>
+    <span class="info-label">Blocker</span><span class="info-value blocker">Newegg anti-bot 反爬</span>
+    <span class="info-label">Next</span><span class="info-value">Akash 链上数据源 + CI 部署</span>
+  </div>
+  <ul class="milestones">
+    <li><span class="ms-icon ms-done">✓</span><span class="ms-text-done">脚本原型完成</span></li>
+    <li><span class="ms-icon ms-done">✓</span><span class="ms-text-done">拆分为 repo 结构</span></li>
+    <li><span class="ms-icon ms-active">→</span><span class="ms-text-active">GitHub 建库</span></li>
+    <li><span class="ms-icon ms-todo">·</span><span class="ms-text-todo">Akash 数据源</span></li>
+    <li><span class="ms-icon ms-todo">·</span><span class="ms-text-todo">Dashboard MVP</span></li>
+  </ul>
+</div>
+
+<div class="section-title">All Tasks</div>
+<ul class="task-list">
+  <li class="done">脚本原型 ✓</li>
+  <li class="done">Repo 结构拆分 ✓</li>
+  <li class="done">Dashboard 上线 ✓</li>
+  <li class="urgent">GitHub 建库</li>
+  <li class="urgent">Akash 数据源接入</li>
+  <li class="normal">套利信号 TG Bot</li>
+  <li class="normal">Dashboard MVP · FastAPI</li>
+  <li class="normal">数据分析 · 周期&价差</li>
+</ul>
+
+<div class="footer">@Kieran · Sprint Dashboard · 高性能ですから！ ✨</div>
+</body>
+</html>

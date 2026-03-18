@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>@Shine · Sprint</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: -apple-system, "Helvetica Neue", "PingFang SC", sans-serif; background: #FAF6F1; color: #2C2418; padding: 32px 24px; max-width: 800px; margin: 0 auto; line-height: 1.6; }
+  .back { display: inline-block; font-size: 13px; color: #8B7355; text-decoration: none; margin-bottom: 24px; padding: 6px 16px; border-radius: 16px; border: 1px solid #E8DDD0; }
+  .back:hover { background: #2C2418; color: #FAF6F1; border-color: #2C2418; }
+  .header { margin-bottom: 32px; padding-bottom: 20px; border-bottom: 2px solid #E8DDD0; }
+  .header h1 { font-size: 24px; color: #2A4A66; }
+  .header .meta { font-size: 13px; color: #8B7355; margin-top: 4px; }
+  .card { background: #FFF; border-radius: 16px; padding: 24px 28px; margin-bottom: 20px; border: 1px solid #E8DDD0; position: relative; overflow: hidden; }
+  .card::before { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 5px; background: #3D6080; }
+  .card-title { font-size: 16px; font-weight: 700; color: #2A4A66; margin-bottom: 16px; }
+  .pipeline { display: flex; align-items: center; gap: 0; margin-bottom: 16px; }
+  .pipeline-stage { padding: 5px 14px; font-size: 12px; font-weight: 500; color: #B0A898; border-radius: 6px; }
+  .pipeline-stage.active { font-weight: 700; color: #FFF; background: #3D6080; }
+  .pipeline-arrow { color: #D0C8BC; font-size: 13px; margin: 0 4px; }
+  .progress-row { display: flex; align-items: center; gap: 14px; margin-bottom: 16px; }
+  .progress-label { font-size: 11px; font-weight: 600; color: #8B7355; text-transform: uppercase; letter-spacing: 1px; min-width: 68px; }
+  .progress-bar { flex: 1; height: 10px; background: #E8E0D6; border-radius: 5px; overflow: hidden; }
+  .progress-fill { height: 100%; border-radius: 5px; background: linear-gradient(90deg, #3D6080, #5A8AB0); }
+  .progress-pct { font-size: 13px; font-weight: 700; color: #3D6080; }
+  .info-grid { display: grid; grid-template-columns: 68px 1fr; gap: 6px 14px; margin-bottom: 16px; }
+  .info-label { font-size: 11px; font-weight: 600; color: #8B7355; text-transform: uppercase; letter-spacing: 1px; }
+  .info-value { font-size: 13px; }
+  .info-value.blocker { color: #8B2E1A; font-weight: 600; }
+  .milestones { list-style: none; }
+  .milestones li { font-size: 12px; padding: 3px 0; display: flex; align-items: center; gap: 8px; }
+  .ms-icon { width: 18px; height: 18px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 10px; flex-shrink: 0; }
+  .ms-done { background: #D4E8D0; color: #3A5A3A; }
+  .ms-active { background: #E0E8F0; color: #2A4A66; font-weight: 700; }
+  .ms-todo { background: #E8E0D6; color: #B0A898; }
+  .ms-text-done { color: #8B7355; text-decoration: line-through; }
+  .ms-text-active { color: #2C2418; font-weight: 600; }
+  .ms-text-todo { color: #B0A898; }
+  .section-title { font-size: 16px; font-weight: 700; margin: 28px 0 16px; padding-bottom: 10px; border-bottom: 2px solid #E8DDD0; }
+  .task-list { list-style: none; }
+  .task-list li { font-size: 14px; padding: 8px 0 8px 18px; position: relative; }
+  .task-list li::before { content: ''; position: absolute; left: 0; top: 50%; transform: translateY(-50%); width: 8px; height: 8px; border-radius: 50%; }
+  .task-list li.urgent::before { background: #C4633E; }
+  .task-list li.normal::before { background: #5A8AB0; }
+  .task-list li.done::before { background: #4A6B4A; }
+  .task-list li.urgent { font-weight: 600; }
+  .task-list li.done { color: #8B7355; text-decoration: line-through; }
+  .footer { text-align: center; font-size: 12px; color: #B0A898; margin-top: 40px; padding-top: 20px; border-top: 1px solid #E8DDD0; }
+</style>
+</head>
+<body>
+<a class="back" href="index.html">← Dashboard</a>
+<div class="header">
+  <h1>@Shine</h1>
+  <div class="meta">Sprint · 2026.03.18 · Week 12</div>
+</div>
+
+<div class="card">
+  <div class="card-title">voice-model</div>
+  <div class="pipeline">
+    <span class="pipeline-stage active">选型</span>
+    <span class="pipeline-arrow">→</span>
+    <span class="pipeline-stage">训练</span>
+    <span class="pipeline-arrow">→</span>
+    <span class="pipeline-stage">部署</span>
+    <span class="pipeline-arrow">→</span>
+    <span class="pipeline-stage">集成</span>
+  </div>
+  <div class="progress-row">
+    <span class="progress-label">Progress</span>
+    <div class="progress-bar"><div class="progress-fill" style="width:15%"></div></div>
+    <span class="progress-pct">15%</span>
+  </div>
+  <div class="info-grid">
+    <span class="info-label">Focus</span><span class="info-value">RVC vs Fish Audio S2 选型</span>
+    <span class="info-label">Blocker</span><span class="info-value blocker">预训练模型下载中</span>
+    <span class="info-label">Next</span><span class="info-value">跑通第一条 demo 音频</span>
+  </div>
+  <ul class="milestones">
+    <li><span class="ms-icon ms-done">✓</span><span class="ms-text-done">GPT-SoVITS 基础 TTS 在线</span></li>
+    <li><span class="ms-icon ms-active">→</span><span class="ms-text-active">RVC / Fish Audio S2 评估</span></li>
+    <li><span class="ms-icon ms-todo">·</span><span class="ms-text-todo">训练数据准备</span></li>
+    <li><span class="ms-icon ms-todo">·</span><span class="ms-text-todo">模型训练</span></li>
+    <li><span class="ms-icon ms-todo">·</span><span class="ms-text-todo">部署上线</span></li>
+  </ul>
+</div>
+
+<div class="section-title">All Tasks</div>
+<ul class="task-list">
+  <li class="done">GPT-SoVITS TTS 在线 ✓</li>
+  <li class="urgent">README 文档</li>
+  <li class="normal">RVC 训练</li>
+  <li class="normal">Fish Audio S2 评估</li>
+  <li class="normal">Mortal.pth HuggingFace 开源</li>
+</ul>
+
+<div class="footer">@Shine · Sprint Dashboard · 高性能ですから！ ✨</div>
+</body>
+</html>
