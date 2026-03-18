@@ -288,6 +288,32 @@
     padding: 12px;
     max-height: 360px;
     overflow-y: auto;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+  .kanban-col::-webkit-scrollbar { display: none; }
+
+  /* User Links */
+  .user-links {
+    display: flex;
+    justify-content: center;
+    gap: 32px;
+    margin-bottom: 28px;
+  }
+  .user-link {
+    font-size: 14px;
+    font-weight: 600;
+    color: #8B7355;
+    text-decoration: none;
+    padding: 6px 20px;
+    border-radius: 20px;
+    border: 1.5px solid #E8DDD0;
+    transition: all 0.2s;
+  }
+  .user-link:hover {
+    background: #2C2418;
+    color: #FAF6F1;
+    border-color: #2C2418;
   }
   .kanban-header {
     font-size: 12px;
@@ -345,6 +371,11 @@
     <span class="stat-pill stat-urgent">5 urgent</span>
     <span class="stat-pill stat-normal">6 two-week</span>
     <span class="stat-pill stat-total">17 total</span>
+  </div>
+  <div class="user-links">
+    <a class="user-link" href="#kieran">@Kieran</a>
+    <a class="user-link" href="#shine">@Shine</a>
+    <a class="user-link" href="#aotian">@Aotian</a>
   </div>
 </div>
 
@@ -468,7 +499,7 @@
 <div class="section-title">Sprint Board</div>
 
 <div class="sprint-group">
-  <div class="sprint-owner">@Kieran</div>
+  <div class="sprint-owner" id="kieran">@Kieran</div>
   <ul class="sprint-list">
     <li class="urgent">GitHub 建库</li>
     <li class="urgent">Akash 数据源接入</li>
@@ -477,7 +508,7 @@
 </div>
 
 <div class="sprint-group">
-  <div class="sprint-owner">@Shine</div>
+  <div class="sprint-owner" id="shine">@Shine</div>
   <ul class="sprint-list">
     <li class="urgent">README 文档</li>
     <li class="normal">RVC 训练</li>
@@ -486,7 +517,7 @@
 </div>
 
 <div class="sprint-group">
-  <div class="sprint-owner">@Aotian</div>
+  <div class="sprint-owner" id="aotian">@Aotian</div>
   <ul class="sprint-list">
     <li class="urgent">知乎爬虫</li>
     <li class="urgent">性转克隆体可行性论证</li>
