@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Sprint Dashboard · 03.18</title>
+<title>Sprint Dashboard · 03.24</title>
 <style>* { margin: 0; padding: 0; box-sizing: border-box; }
 body { font-family: -apple-system, "Helvetica Neue", "PingFang SC", "Hiragino Sans GB", sans-serif; background: #FAF6F1; color: #2C2418; padding: 32px 36px; max-width: 980px; margin: 0 auto; line-height: 1.6; }
 .header { text-align: center; margin-bottom: 24px; padding-bottom: 16px; border-bottom: 2px solid #E8DDD0; }
@@ -143,15 +143,15 @@ body { font-family: -apple-system, "Helvetica Neue", "PingFang SC", "Hiragino Sa
   
   <a class="float-sidebar-link" href="aotian.html"><span class="dot dot-green"></span>Aotian</a>
   
-  <div class="float-sidebar-footer">Sprint W12<br>03.18 Wed</div>
+  <div class="float-sidebar-footer">Sprint W13<br>03.24 Mon</div>
 </nav>
 
 <div class="header">
   <h1>Sprint Dashboard</h1>
-  <div class="meta">GPUWatch · 2026.03.18 Wednesday · Week 12</div>
+  <div class="meta">GPUWatch · 2026.03.24 Monday · Week 13</div>
   <div class="stats">
-    <span class="stat-pill stat-urgent">6 urgent</span>
-    <span class="stat-pill stat-normal">10 two-week</span>
+    <span class="stat-pill stat-urgent">7 urgent</span>
+    <span class="stat-pill stat-normal">9 two-week</span>
     <span class="stat-pill stat-total">22 total</span>
   </div>
 </div>
@@ -226,10 +226,10 @@ body { font-family: -apple-system, "Helvetica Neue", "PingFang SC", "Hiragino Sa
   <div class="card-desc">ATRI 语音模型训练 & 部署</div>
   <div class="pipeline">
     
-    <span class="pipeline-stage active">选型</span>
+    <span class="pipeline-stage done">选型</span>
     <span class="pipeline-arrow">→</span>
     
-    <span class="pipeline-stage ">训练</span>
+    <span class="pipeline-stage active">训练</span>
     <span class="pipeline-arrow">→</span>
     
     <span class="pipeline-stage ">部署</span>
@@ -241,13 +241,13 @@ body { font-family: -apple-system, "Helvetica Neue", "PingFang SC", "Hiragino Sa
   </div>
   <div class="progress-row">
     <span class="progress-label">Progress</span>
-    <div class="progress-bar"><div class="progress-fill" style="width:15%"></div></div>
-    <span class="progress-pct">15%</span>
+    <div class="progress-bar"><div class="progress-fill" style="width:20%"></div></div>
+    <span class="progress-pct">20%</span>
   </div>
   <div class="info-grid">
-    <span class="info-label">Focus</span><span class="info-value">RVC vs Fish Audio S2 选型</span>
-    <span class="info-label">Blocker</span><span class="info-value blocker">预训练模型下载中</span>
-    <span class="info-label">Next</span><span class="info-value">跑通第一条 demo 音频</span>
+    <span class="info-label">Focus</span><span class="info-value">Fish Audio S2 评估 & 训练</span>
+    <span class="info-label">Blocker</span><span class="info-value blocker">Fish Audio S2 接入测试</span>
+    <span class="info-label">Next</span><span class="info-value">Fish Audio S2 跑通 demo</span>
   </div>
   <ul class="milestones">
     
@@ -257,7 +257,12 @@ body { font-family: -apple-system, "Helvetica Neue", "PingFang SC", "Hiragino Sa
     </li>
     
     <li>
-      <span class="ms-icon ms-active">→</span><span class="ms-text-active">RVC / Fish Audio S2 评估</span>
+      <span class="ms-icon ms-done">✓</span><span class="ms-text-done">RVC 评估 → 淘汰</span>
+      
+    </li>
+    
+    <li>
+      <span class="ms-icon ms-active">→</span><span class="ms-text-active">Fish Audio S2 评估</span>
       
     </li>
     
@@ -288,9 +293,7 @@ body { font-family: -apple-system, "Helvetica Neue", "PingFang SC", "Hiragino Sa
     
     <div class="kanban-card ">README 文档</div>
     
-    <div class="kanban-card ">RVC 训练</div>
-    
-    <div class="kanban-card ">Fish Audio S2</div>
+    <div class="kanban-card ">Fish Audio S2 评估</div>
     
     <div class="kanban-card ">CENX 研究</div>
     
@@ -304,11 +307,11 @@ body { font-family: -apple-system, "Helvetica Neue", "PingFang SC", "Hiragino Sa
   <div class="kanban-col">
     <div class="kanban-header kanban-progress">IN PROGRESS</div>
     
-    <div class="kanban-card active">市场调研 (03.18-19) <span class="kanban-owner">@Kieran</span></div>
+    <div class="kanban-card active">Akash 数据源接入 <span class="kanban-owner">@Kieran</span></div>
     
     <div class="kanban-card active">知乎爬虫 <span class="kanban-owner">@Aotian</span></div>
     
-    <div class="kanban-card active">RVC vs Fish Audio 选型 <span class="kanban-owner">@Shine</span></div>
+    <div class="kanban-card active">Fish Audio S2 评估 <span class="kanban-owner">@Shine</span></div>
     
   </div>
   <div class="kanban-col">
@@ -323,6 +326,8 @@ body { font-family: -apple-system, "Helvetica Neue", "PingFang SC", "Hiragino Sa
     <div class="kanban-card done">性转克隆体论证 ✓</div>
     
     <div class="kanban-card done">GPT-SoVITS TTS ✓</div>
+    
+    <div class="kanban-card done">RVC 评估 → 淘汰 ✓</div>
     
     <div class="kanban-card done">Dashboard 上线 ✓</div>
     
@@ -360,9 +365,9 @@ body { font-family: -apple-system, "Helvetica Neue", "PingFang SC", "Hiragino Sa
     
     <li class="urgent">README 文档</li>
     
-    <li class="normal">RVC 训练</li>
+    <li class="normal">RVC 评估 → 淘汰 ✓</li>
     
-    <li class="normal">Fish Audio S2 评估</li>
+    <li class="urgent">Fish Audio S2 评估</li>
     
     <li class="normal">Mortal HuggingFace 开源</li>
     

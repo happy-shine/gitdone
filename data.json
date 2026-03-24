@@ -1,7 +1,7 @@
 {
-  "sprint": "03.18",
-  "week": 12,
-  "weekday": "Wednesday",
+  "sprint": "03.24",
+  "week": 13,
+  "weekday": "Monday",
   "projects": [
     {
       "name": "gpu-price-tracker",
@@ -28,14 +28,15 @@
       "accent": "blue",
       "desc": "ATRI 语音模型训练 & 部署",
       "pipeline": ["选型", "训练", "部署", "集成"],
-      "current_stage": 0,
-      "progress": 15,
-      "focus": "RVC vs Fish Audio S2 选型",
-      "blocker": "预训练模型下载中",
-      "next": "跑通第一条 demo 音频",
+      "current_stage": 1,
+      "progress": 20,
+      "focus": "Fish Audio S2 评估 & 训练",
+      "blocker": "Fish Audio S2 接入测试",
+      "next": "Fish Audio S2 跑通 demo",
       "milestones": [
         {"status": "done", "text": "GPT-SoVITS 基础 TTS 在线"},
-        {"status": "active", "text": "RVC / Fish Audio S2 评估"},
+        {"status": "done", "text": "RVC 评估 → 淘汰"},
+        {"status": "active", "text": "Fish Audio S2 评估"},
         {"status": "todo", "text": "训练数据准备"},
         {"status": "todo", "text": "模型训练"},
         {"status": "todo", "text": "部署上线"}
@@ -65,8 +66,8 @@
       "tasks": [
         {"text": "GPT-SoVITS TTS 在线", "priority": "normal", "done": true},
         {"text": "README 文档", "priority": "urgent", "done": false},
-        {"text": "RVC 训练", "priority": "normal", "done": false},
-        {"text": "Fish Audio S2 评估", "priority": "normal", "done": false},
+        {"text": "RVC 评估 → 淘汰", "priority": "normal", "done": true},
+        {"text": "Fish Audio S2 评估", "priority": "urgent", "done": false},
         {"text": "Mortal HuggingFace 开源", "priority": "normal", "done": false}
       ]
     },
@@ -87,8 +88,7 @@
       {"text": "Akash 数据源接入"},
       {"text": "套利信号 TG Bot"},
       {"text": "README 文档"},
-      {"text": "RVC 训练"},
-      {"text": "Fish Audio S2"},
+      {"text": "Fish Audio S2 评估"},
       {"text": "CENX 研究"},
       {"text": "Dashboard MVP", "dim": true},
       {"text": "开源推广", "dim": true},
@@ -97,7 +97,7 @@
     "in_progress": [
       {"text": "Akash 数据源接入", "owner": "Kieran"},
       {"text": "知乎爬虫", "owner": "Aotian"},
-      {"text": "RVC vs Fish Audio 选型", "owner": "Shine"}
+      {"text": "Fish Audio S2 评估", "owner": "Shine"}
     ],
     "done": [
       {"text": "脚本原型"},
@@ -105,6 +105,7 @@
       {"text": "GitHub 建库"},
       {"text": "性转克隆体论证"},
       {"text": "GPT-SoVITS TTS"},
+      {"text": "RVC 评估 → 淘汰"},
       {"text": "Dashboard 上线"},
       {"text": "数据模板分离"}
     ]
