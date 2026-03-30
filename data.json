@@ -37,7 +37,8 @@
         {"text": "Akash 数据源接入", "priority": "urgent", "done": false},
         {"text": "套利信号 TG Bot", "priority": "normal", "done": false},
         {"text": "Dashboard MVP · FastAPI", "priority": "normal", "done": false},
-        {"text": "数据分析 · 周期&价差", "priority": "normal", "done": false}
+        {"text": "数据分析 · 周期&价差", "priority": "normal", "done": false},
+        {"text": "领取 GCP 免费 $300（需信用卡）", "priority": "normal", "done": false}
       ]
     },
     {
@@ -63,6 +64,7 @@
       {"text": "Akash 数据源接入"},
       {"text": "套利信号 TG Bot"},
       {"text": "LobsterKiller MVP"},
+      {"text": "领取 GCP $300"},
       {"text": "Dashboard MVP", "dim": true},
       {"text": "开源推广", "dim": true},
       {"text": "算力预言机", "dim": true}
