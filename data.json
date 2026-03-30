@@ -1,6 +1,6 @@
 {
-  "sprint": "03.24",
-  "week": 13,
+  "sprint": "03.30",
+  "week": 14,
   "weekday": "Monday",
   "projects": [
     {
@@ -10,36 +10,17 @@
       "desc": "GPU 价格 & 库存监控工具",
       "pipeline": ["采集", "分析", "展示", "变现"],
       "current_stage": 1,
-      "progress": 35,
-      "focus": "GitHub 建库 / Scraper 接入",
+      "progress": 40,
+      "focus": "Akash 链上数据源 + Dashboard",
       "blocker": "Newegg anti-bot 反爬",
-      "next": "Akash 链上数据源 + CI 部署",
+      "next": "Dashboard MVP + 套利信号 Bot",
       "milestones": [
         {"status": "done", "text": "脚本原型完成"},
         {"status": "done", "text": "拆分为 repo 结构"},
         {"status": "done", "text": "GitHub 建库"},
+        {"status": "done", "text": "README 文档"},
         {"status": "active", "text": "Akash 数据源"},
         {"status": "todo", "text": "Dashboard MVP"}
-      ]
-    },
-    {
-      "name": "voice-model",
-      "owner": "Shine",
-      "accent": "blue",
-      "desc": "ATRI 语音模型训练 & 部署",
-      "pipeline": ["选型", "训练", "部署", "集成"],
-      "current_stage": 1,
-      "progress": 20,
-      "focus": "Fish Audio S2 评估 & 训练",
-      "blocker": "Fish Audio S2 接入测试",
-      "next": "Fish Audio S2 跑通 demo",
-      "milestones": [
-        {"status": "done", "text": "GPT-SoVITS 基础 TTS 在线"},
-        {"status": "done", "text": "RVC 评估 → 淘汰"},
-        {"status": "active", "text": "Fish Audio S2 评估"},
-        {"status": "todo", "text": "训练数据准备"},
-        {"status": "todo", "text": "模型训练"},
-        {"status": "todo", "text": "部署上线"}
       ]
     }
   ],
@@ -52,6 +33,7 @@
       "tasks": [
         {"text": "GitHub 建库", "priority": "urgent", "done": true},
         {"text": "Dashboard 数据模板分离", "priority": "urgent", "done": true},
+        {"text": "README 文档", "priority": "urgent", "done": true},
         {"text": "Akash 数据源接入", "priority": "urgent", "done": false},
         {"text": "套利信号 TG Bot", "priority": "normal", "done": false},
         {"text": "Dashboard MVP · FastAPI", "priority": "normal", "done": false},
@@ -62,14 +44,8 @@
       "id": "shine",
       "name": "Shine",
       "accent": "blue",
-      "project": "voice-model",
-      "tasks": [
-        {"text": "GPT-SoVITS TTS 在线", "priority": "normal", "done": true},
-        {"text": "README 文档", "priority": "urgent", "done": false},
-        {"text": "RVC 评估 → 淘汰", "priority": "normal", "done": true},
-        {"text": "Fish Audio S2 评估", "priority": "urgent", "done": false},
-        {"text": "Mortal HuggingFace 开源", "priority": "normal", "done": false}
-      ]
+      "project": null,
+      "tasks": []
     },
     {
       "id": "aotian",
@@ -78,8 +54,7 @@
       "project": null,
       "tasks": [
         {"text": "性转克隆体可行性论证", "priority": "urgent", "done": true},
-        {"text": "知乎爬虫", "priority": "urgent", "done": false},
-        {"text": "CENX 研究", "priority": "normal", "done": false}
+        {"text": "LobsterKiller MVP — AI Agent框架", "priority": "urgent", "done": false}
       ]
     }
   ],
@@ -87,25 +62,22 @@
     "todo": [
       {"text": "Akash 数据源接入"},
       {"text": "套利信号 TG Bot"},
-      {"text": "README 文档"},
-      {"text": "Fish Audio S2 评估"},
-      {"text": "CENX 研究"},
+      {"text": "LobsterKiller MVP"},
       {"text": "Dashboard MVP", "dim": true},
       {"text": "开源推广", "dim": true},
       {"text": "算力预言机", "dim": true}
     ],
     "in_progress": [
       {"text": "Akash 数据源接入", "owner": "Kieran"},
-      {"text": "知乎爬虫", "owner": "Aotian"},
-      {"text": "Fish Audio S2 评估", "owner": "Shine"}
+      {"text": "LobsterKiller MVP", "owner": "Aotian"}
     ],
     "done": [
       {"text": "脚本原型"},
       {"text": "Repo 结构拆分"},
       {"text": "GitHub 建库"},
+      {"text": "README 文档"},
       {"text": "性转克隆体论证"},
       {"text": "GPT-SoVITS TTS"},
-      {"text": "RVC 评估 → 淘汰"},
       {"text": "Dashboard 上线"},
       {"text": "数据模板分离"}
     ]
